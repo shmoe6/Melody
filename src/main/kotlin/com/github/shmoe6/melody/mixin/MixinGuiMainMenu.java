@@ -1,4 +1,4 @@
-package com.example.mixin;
+package com.github.shmoe6.melody.mixin;
 
 import net.minecraft.client.gui.GuiMainMenu;
 import org.spongepowered.asm.mixin.Mixin;
