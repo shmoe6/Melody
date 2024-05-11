@@ -48,13 +48,19 @@ object TickHandler {
 
         if (event.phase != TickEvent.Phase.START) return
 
+        var foundArea = false
         val tabEntries = ArrayList<String>()
         fetchTabEntries().forEach { tabEntries.add(StringUtils.stripControlCodes(it.text)) }
         tabEntries.forEach {
             if (it.contains("Area:")) {
                 ExampleMod.currentWorld = it.substring(6)
+                foundArea = true
                 //println("CURRENT AREA: ${ExampleMod.currentWorld}")
             }
+        }
+
+        if (!foundArea) {
+            ExampleMod.currentWorld = null
         }
     }
 }

@@ -27,10 +27,11 @@ class ExampleMod {
         println("Dirt: ${Blocks.dirt.unlocalizedName}")
 
         // register event handlers
+        MinecraftForge.EVENT_BUS.register(ClientChatReceivedHandler)
         MinecraftForge.EVENT_BUS.register(GuiOpenHandler)
         MinecraftForge.EVENT_BUS.register(ItemTooltipHandler)
         MinecraftForge.EVENT_BUS.register(PacketReceivedHandler)
-        MinecraftForge.EVENT_BUS.register(ClientChatReceivedHandler)
+        MinecraftForge.EVENT_BUS.register(RenderTickHandler)
         MinecraftForge.EVENT_BUS.register(TickHandler)
 
         // register commands
