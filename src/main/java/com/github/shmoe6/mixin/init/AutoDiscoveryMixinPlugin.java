@@ -1,4 +1,4 @@
-package com.github.shmoe6.melody.init;
+package com.github.shmoe6.mixin.init;
 
 import org.spongepowered.asm.lib.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
