@@ -69,6 +69,7 @@ repositories {
     maven("https://repo.spongepowered.org/maven/")
     // If you don't want to log in with your real minecraft account, remove this line
     maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
+    maven("https://repo.essential.gg/repository/maven-public")
 }
 
 val shadowImpl: Configuration by configurations.creating {
@@ -90,7 +91,7 @@ dependencies {
 
     // If you don't want to log in with your real minecraft account, remove this line
     runtimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.2.0")
-
+    implementation("gg.essential:vigilance-$mcVersion-forge:297")
 }
 
 minecraft.runs {
@@ -150,7 +151,14 @@ tasks.shadowJar {
 
     // If you want to include other dependencies and shadow them, you can relocate them in here
     fun relocate(name: String) = relocate(name, "$baseGroup.deps.$name")
+
+    //vigilance
+    relocate("gg.essential.vigilance", "com.github.shmoe6.vigilance")
+    // vigilance dependencies
+    relocate("gg.essential.elementa", "com.github.shmoe6.elementa")
+    // elementa dependencies
+    relocate("gg.essential.universalcraft", "com.github.shmoe6.universalcraft")
 }
 
 tasks.assemble.get().dependsOn(tasks.remapJar)
-
+tasks.remapJar { dependsOn(tasks.shadowJar) }

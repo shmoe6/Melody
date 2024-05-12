@@ -1,8 +1,9 @@
 package com.github.shmoe6.melody.handlers
 
-import com.github.shmoe6.melody.ExampleMod
+import com.github.shmoe6.melody.Melody
 import com.google.common.collect.ComparisonChain
 import com.google.common.collect.Ordering
+import gg.essential.universal.UScreen
 import net.minecraft.client.Minecraft
 import net.minecraft.client.network.NetworkPlayerInfo
 import net.minecraft.scoreboard.ScorePlayerTeam
@@ -12,7 +13,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 
 object TickHandler {
-    val NetworkPlayerInfo.text: String
+    private val NetworkPlayerInfo.text: String
         get() = displayName?.formattedText ?: ScorePlayerTeam.formatPlayerName(
             playerTeam,
             gameProfile.name
@@ -37,7 +38,7 @@ object TickHandler {
         }
     }
 
-    fun fetchTabEntries(): List<NetworkPlayerInfo> = Minecraft.getMinecraft().thePlayer?.let {
+    private fun fetchTabEntries(): List<NetworkPlayerInfo> = Minecraft.getMinecraft().thePlayer?.let {
         playerInfoOrdering.immutableSortedCopy(
             Minecraft.getMinecraft().thePlayer.sendQueue.playerInfoMap
         )
@@ -48,19 +49,26 @@ object TickHandler {
 
         if (event.phase != TickEvent.Phase.START) return
 
+        // code for getting current area
         var foundArea = false
         val tabEntries = ArrayList<String>()
         fetchTabEntries().forEach { tabEntries.add(StringUtils.stripControlCodes(it.text)) }
         tabEntries.forEach {
             if (it.contains("Area:")) {
-                ExampleMod.currentWorld = it.substring(6)
+                Melody.currentWorld = it.substring(6)
                 foundArea = true
                 //println("CURRENT AREA: ${ExampleMod.currentWorld}")
             }
         }
 
         if (!foundArea) {
-            ExampleMod.currentWorld = null
+            Melody.currentWorld = null
+        }
+
+        // load any unloaded gui screen
+        if (Melody.currentGui != null) {
+            UScreen.displayScreen(Melody.currentGui)
+            Melody.currentGui = null
         }
     }
 }

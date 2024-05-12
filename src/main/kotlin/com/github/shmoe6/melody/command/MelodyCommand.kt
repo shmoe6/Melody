@@ -1,12 +1,13 @@
 package com.github.shmoe6.melody.command
 
+import com.github.shmoe6.melody.Melody
+import com.github.shmoe6.melody.core.MelodyConfig
 import net.minecraft.command.CommandBase
 import net.minecraft.command.ICommandSender
-import net.minecraft.util.ChatComponentText
 
-object TestCommand : CommandBase() {
+object MelodyCommand : CommandBase() {
     override fun getCommandName(): String {
-        return "test"
+        return "melody"
     }
 
     override fun getCommandUsage(sender: ICommandSender?): String {
@@ -14,7 +15,7 @@ object TestCommand : CommandBase() {
     }
 
     override fun processCommand(sender: ICommandSender?, args: Array<out String>?) {
-        sender?.addChatMessage(ChatComponentText("§5[Melody] §fTest command working!"))
+        Melody.currentGui = MelodyConfig.gui()
     }
 
     override fun canCommandSenderUseCommand(sender: ICommandSender?): Boolean {
@@ -24,5 +25,4 @@ object TestCommand : CommandBase() {
 //    override fun getCommandAliases(): MutableList<String> {
 //        return Arrays.asList("")
 //    }
-
 }
