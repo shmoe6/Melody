@@ -1,7 +1,6 @@
 package com.github.shmoe6.melody.command
 
-import com.github.shmoe6.melody.Melody
-import com.github.shmoe6.melody.core.MelodyConfig
+import com.github.shmoe6.melody.handlers.OverlayHandler
 import net.minecraft.command.CommandBase
 import net.minecraft.command.ICommandSender
 
@@ -15,7 +14,8 @@ object MelodyCommand : CommandBase() {
     }
 
     override fun processCommand(sender: ICommandSender?, args: Array<out String>?) {
-        Melody.currentGui = MelodyConfig.gui()
+        //Melody.currentGui = MelodyConfig.gui()
+        OverlayHandler.queueEditScreen = true
     }
 
     override fun canCommandSenderUseCommand(sender: ICommandSender?): Boolean {

@@ -11,7 +11,7 @@ class OverlayScreen : WindowScreen(ElementaVersion.V5) {
     private val elements = HashMap<MelodyFeatureRenderable, Boolean>() // TODO: add compatibility for MelodyFeatureRenderable
 
     fun addToScreen(f : MelodyFeatureRenderable) {
-        this.elements.put(f, false)
+        this.elements[f] = false
         f.mainUiComponent.childOf(this.window)
         refreshEnabledElements()
     }

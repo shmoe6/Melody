@@ -3,12 +3,15 @@ package com.github.shmoe6.melody.features.overlay
 import com.github.shmoe6.melody.Melody
 import com.github.shmoe6.melody.core.MelodyConfig
 import com.github.shmoe6.melody.features.MelodyFeatureRenderable
+import com.github.shmoe6.melody.handlers.OverlayHandler
 import gg.essential.elementa.components.UIText
 import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixels
+import net.minecraft.client.Minecraft
 
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
+import org.lwjgl.input.Mouse
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
@@ -23,7 +26,24 @@ object Clock : MelodyFeatureRenderable {
         y = yPos.pixels
     }
 
+    var selectedInEditGui = false
+
     init {
+        mainUiComponent.onMouseClick { event ->
+            if (OverlayHandler.editMode && isPointInside(event.absoluteX, event.absoluteY)) {
+                selectedInEditGui = true
+            }
+        }.onMouseDrag { mouseX, mouseY, mouseButton ->
+            if (OverlayHandler.editMode && selectedInEditGui) {
+                xPos = (mouseX + this.getLeft()).toInt()
+                yPos = (mouseY + this.getTop()).toInt()
+                setX(xPos.pixels)
+                setY(yPos.pixels)
+            }
+        }.onMouseRelease {
+            selectedInEditGui = false
+        }
+
         Melody.overlayHandler.overlay.addToScreen(this)
     }
 

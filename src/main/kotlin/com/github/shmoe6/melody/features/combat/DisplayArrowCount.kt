@@ -3,13 +3,14 @@ package com.github.shmoe6.melody.features.combat
 import com.github.shmoe6.melody.Melody
 import com.github.shmoe6.melody.core.MelodyConfig
 import com.github.shmoe6.melody.features.MelodyFeatureRenderable
+import com.github.shmoe6.melody.features.overlay.Clock
+import com.github.shmoe6.melody.handlers.OverlayHandler
 import gg.essential.elementa.components.UIText
 import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixels
 import net.minecraft.client.Minecraft
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
-import scala.swing.Applet.UI
 
 object DisplayArrowCount : MelodyFeatureRenderable {
 
@@ -21,6 +22,14 @@ object DisplayArrowCount : MelodyFeatureRenderable {
     }
 
     init {
+        this.mainUiComponent.onMouseDrag { mouseX, mouseY, mouseButton ->
+            if (OverlayHandler.editMode && isPointInside(mouseX, mouseY)) {
+                Clock.xPos = mouseX.toInt()
+                Clock.yPos = mouseY.toInt()
+                setX(Clock.xPos.pixels)
+                setY(Clock.yPos.pixels)
+            }
+        }
 
         Melody.overlayHandler.overlay.addToScreen(this)
     }
