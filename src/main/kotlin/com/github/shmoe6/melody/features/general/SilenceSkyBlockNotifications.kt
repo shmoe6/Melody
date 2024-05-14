@@ -1,11 +1,9 @@
-package com.github.shmoe6.melody.features
+package com.github.shmoe6.melody.features.general
 
 import com.github.shmoe6.melody.core.MelodyConfig
 import net.minecraft.util.StringUtils
 import net.minecraftforge.client.event.ClientChatReceivedEvent
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
-import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.collections.HashSet
 
 object SilenceSkyBlockNotifications {

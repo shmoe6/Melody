@@ -55,6 +55,49 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
     )
     var wormCooldownTimerEnabled = false
 
+    @Property(
+        type = PropertyType.SWITCH,
+        name = "Lock Slots",
+        description = "Enables locking slots. Press L to toggle locking on a slot.",
+        category = "General",
+    )
+    var lockSlotsEnabled = false
+
+    @Property(
+        type = PropertyType.TEXT,
+        name = "Locked Slots",
+        description = "List of locked slots represented by their int index in the mainInventory.",
+        category = "General",
+        hidden = true
+    )
+    var lockedSlots = ""
+
+    @Property(
+        type = PropertyType.SWITCH,
+        name = "Clock",
+        description = "Displays the current time.",
+        category = "General"
+    )
+    var clockEnabled = false
+
+    @Property(
+        type = PropertyType.NUMBER,
+        name = "Clock xPos",
+        description = "x coordinate to render the feature at",
+        category = "General",
+        hidden = true
+    )
+    var clockXPos = 50
+
+    @Property(
+        type = PropertyType.NUMBER,
+        name = "Clock yPos",
+        description = "y coordinate to render the feature at",
+        category = "General",
+        hidden = true
+    )
+    var clockYPos = 50
+
     init {
         initialize()
         preload()

@@ -1,4 +1,4 @@
-package com.github.shmoe6.melody.features
+package com.github.shmoe6.melody.features.farming
 
 import com.github.shmoe6.melody.Melody
 import com.github.shmoe6.melody.core.MelodyConfig

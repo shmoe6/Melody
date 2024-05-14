@@ -2,6 +2,7 @@
   "package": "${basePackage}.mixin",
   "plugin": "${basePackage}.init.AutoDiscoveryMixinPlugin",
   "client": [
+    "IsMouseOverSlotAccessor",
     "PacketEventMixin"
   ],
   "refmap": "mixins.${modid}.refmap.json",

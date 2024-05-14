@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class PacketEventMixin {
 
     @Inject(method = "channelRead0*", at = @At("HEAD"), cancellable = true)
-    private void onChannelRead(ChannelHandlerContext context, Packet<?> packet, CallbackInfo callbackInfo) {
+    private void onChannelRead_melody(ChannelHandlerContext context, Packet<?> packet, CallbackInfo callbackInfo) {
         PacketReceivedEvent event = new PacketReceivedEvent(packet);
         MinecraftForge.EVENT_BUS.post(event);
 

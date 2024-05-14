@@ -1,4 +1,4 @@
-package com.github.shmoe6.melody.features
+package com.github.shmoe6.melody.features.inventory
 
 import com.github.shmoe6.melody.core.MelodyConfig
 import net.minecraft.util.StringUtils
