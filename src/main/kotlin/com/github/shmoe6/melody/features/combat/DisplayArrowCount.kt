@@ -14,21 +14,34 @@ import net.minecraftforge.fml.common.gameevent.TickEvent
 
 object DisplayArrowCount : MelodyFeatureRenderable {
 
-    override var xPos: Int = 550
-    override var yPos: Int = 450
-    override var mainUiComponent: UIText = UIText().constrain {
+    override var xPos: Int = MelodyConfig.arrowCountXPos
+    override var yPos: Int = MelodyConfig.arrowCountYPos
+    override var mainUiComponent: UIText = UIText("Current Arrow: null (0)").constrain {
         x = xPos.pixels
         y = yPos.pixels
     }
 
+    var selectedInEditGui = false
+
     init {
-        this.mainUiComponent.onMouseDrag { mouseX, mouseY, mouseButton ->
-            if (OverlayHandler.editMode && isPointInside(mouseX, mouseY)) {
-                Clock.xPos = mouseX.toInt()
-                Clock.yPos = mouseY.toInt()
-                setX(Clock.xPos.pixels)
-                setY(Clock.yPos.pixels)
+        this.mainUiComponent.onMouseClick { event ->
+            if (OverlayHandler.editMode && isPointInside(event.absoluteX, event.absoluteY)) {
+                selectedInEditGui = true
             }
+        }.onMouseDrag { mouseX, mouseY, _ ->
+            if (OverlayHandler.editMode && selectedInEditGui) {
+                xPos = (mouseX + this.getLeft()).toInt()
+                yPos = (mouseY + this.getTop()).toInt()
+                setX(xPos.pixels)
+                setY(yPos.pixels)
+                OverlayHandler.editMade = true
+            }
+        }.onMouseRelease {
+            selectedInEditGui = false
+            MelodyConfig.arrowCountXPos = xPos
+            MelodyConfig.arrowCountYPos = yPos
+//            MelodyConfig.markDirty()
+//            MelodyConfig.writeData()
         }
 
         Melody.overlayHandler.overlay.addToScreen(this)

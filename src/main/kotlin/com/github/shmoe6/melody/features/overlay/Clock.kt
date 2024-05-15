@@ -29,19 +29,24 @@ object Clock : MelodyFeatureRenderable {
     var selectedInEditGui = false
 
     init {
-        mainUiComponent.onMouseClick { event ->
+        this.mainUiComponent.onMouseClick { event ->
             if (OverlayHandler.editMode && isPointInside(event.absoluteX, event.absoluteY)) {
                 selectedInEditGui = true
             }
-        }.onMouseDrag { mouseX, mouseY, mouseButton ->
+        }.onMouseDrag { mouseX, mouseY, _ ->
             if (OverlayHandler.editMode && selectedInEditGui) {
                 xPos = (mouseX + this.getLeft()).toInt()
                 yPos = (mouseY + this.getTop()).toInt()
                 setX(xPos.pixels)
                 setY(yPos.pixels)
+                OverlayHandler.editMade = true
             }
         }.onMouseRelease {
             selectedInEditGui = false
+            MelodyConfig.clockXPos = xPos
+            MelodyConfig.clockYPos = yPos
+//            MelodyConfig.markDirty()
+//            MelodyConfig.writeData()
         }
 
         Melody.overlayHandler.overlay.addToScreen(this)

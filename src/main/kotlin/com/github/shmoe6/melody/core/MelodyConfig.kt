@@ -1,11 +1,23 @@
+@file:SuppressWarnings("unused")
 package com.github.shmoe6.melody.core
 
+import com.github.shmoe6.melody.handlers.OverlayHandler
 import gg.essential.vigilance.Vigilant
 import gg.essential.vigilance.data.Property
 import gg.essential.vigilance.data.PropertyType
 import java.io.File
 
 object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
+
+    @Property(
+        type = PropertyType.BUTTON,
+        name = "Edit GUI",
+        description = "Allows moving around of all active gui elements",
+        category = "General"
+    )
+    fun editGuiButton() {
+        OverlayHandler.queueEditScreen = true
+    }
 
     @Property(
         type = PropertyType.SWITCH,
@@ -38,6 +50,24 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
         category = "General"
     )
     var displayArrowCountEnabled = false
+
+    @Property(
+        type = PropertyType.NUMBER,
+        name = "Arrow Count xPos",
+        description = "x coordinate to render the feature at",
+        category = "General",
+        hidden = true
+    )
+    var arrowCountXPos = 50
+
+    @Property(
+        type = PropertyType.NUMBER,
+        name = "Arrow Count yPos",
+        description = "y coordinate to render the feature at",
+        category = "General",
+        hidden = true
+    )
+    var arrowCountYPos = 50
 
     @Property(
         type = PropertyType.SWITCH,
