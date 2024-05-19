@@ -2,8 +2,7 @@ package com.github.shmoe6.melody.features.combat
 
 import com.github.shmoe6.melody.Melody
 import com.github.shmoe6.melody.core.MelodyConfig
-import com.github.shmoe6.melody.features.MelodyFeatureRenderable
-import com.github.shmoe6.melody.features.overlay.Clock
+import com.github.shmoe6.melody.features.MelodyFeatureOverlayText
 import com.github.shmoe6.melody.handlers.OverlayHandler
 import gg.essential.elementa.components.UIText
 import gg.essential.elementa.dsl.constrain
@@ -12,19 +11,19 @@ import net.minecraft.client.Minecraft
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 
-object DisplayArrowCount : MelodyFeatureRenderable {
+object DisplayArrowCount : MelodyFeatureOverlayText {
 
     override var xPos: Int = MelodyConfig.arrowCountXPos
     override var yPos: Int = MelodyConfig.arrowCountYPos
+    override var selectedInEditGui = false
     override var mainUiComponent: UIText = UIText("Current Arrow: null (0)").constrain {
         x = xPos.pixels
         y = yPos.pixels
     }
 
-    var selectedInEditGui = false
 
     init {
-        this.mainUiComponent.onMouseClick { event ->
+        mainUiComponent.onMouseClick { event ->
             if (OverlayHandler.editMode && isPointInside(event.absoluteX, event.absoluteY)) {
                 selectedInEditGui = true
             }
@@ -40,8 +39,6 @@ object DisplayArrowCount : MelodyFeatureRenderable {
             selectedInEditGui = false
             MelodyConfig.arrowCountXPos = xPos
             MelodyConfig.arrowCountYPos = yPos
-//            MelodyConfig.markDirty()
-//            MelodyConfig.writeData()
         }
 
         Melody.overlayHandler.overlay.addToScreen(this)
@@ -57,12 +54,12 @@ object DisplayArrowCount : MelodyFeatureRenderable {
         }
 
         val numArrows = player?.inventory?.mainInventory?.get(8)?.getTooltip(player, false)?.get(5)
-        (this.mainUiComponent as UIText).setText("$numArrows")
+        mainUiComponent.setText("$numArrows")
     }
 
     private fun clearText() {
-        if ((this.mainUiComponent as UIText).getText() != "") {
-            (this.mainUiComponent as UIText).setText("")
+        if (mainUiComponent.getText() != "") {
+            mainUiComponent.setText("")
         }
     }
 

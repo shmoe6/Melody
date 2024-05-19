@@ -44,6 +44,24 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
     var gardenVisitorDisplayEnabled = false
 
     @Property(
+        type = PropertyType.NUMBER,
+        name = "Visitor Display xPos",
+        description = "x coordinate to render the feature at",
+        category = "General",
+        hidden = true
+    )
+    var visitorDisplayXPos = 50
+
+    @Property(
+        type = PropertyType.NUMBER,
+        name = "Visitor Display yPos",
+        description = "y coordinate to render the feature at",
+        category = "General",
+        hidden = true
+    )
+    var visitorDisplayYPos = 50
+
+    @Property(
         type = PropertyType.SWITCH,
         name = "Display Arrow Count",
         description = "Displays arrow count when holding a bow.",
@@ -127,6 +145,14 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
         hidden = true
     )
     var clockYPos = 50
+
+    @Property(
+        type = PropertyType.SWITCH,
+        name = "Dungeon Death Notifier",
+        description = "Plays a sound when someone dies in a dungeon.",
+        category = "General"
+    )
+    var dungeonDeathNotifierEnabled = false
 
     init {
         initialize()

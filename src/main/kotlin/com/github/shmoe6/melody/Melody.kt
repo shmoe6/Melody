@@ -1,10 +1,12 @@
 @file:SuppressWarnings("unused")
 package com.github.shmoe6.melody
 
+import com.github.shmoe6.melody.command.EvaluateCommand
 import com.github.shmoe6.melody.command.MelodyCommand
 import com.github.shmoe6.melody.command.SimulateCommand
 import com.github.shmoe6.melody.command.TestCommand
 import com.github.shmoe6.melody.features.combat.DisplayArrowCount
+import com.github.shmoe6.melody.features.dungeons.DeathNotifier
 import com.github.shmoe6.melody.features.farming.GardenVisitorDisplay
 import com.github.shmoe6.melody.features.general.SilenceSkyBlockNotifications
 import com.github.shmoe6.melody.features.inventory.HideEffectsHud
@@ -42,6 +44,7 @@ class Melody {
 
         // register feature-specific event handlers
         MinecraftForge.EVENT_BUS.register(Clock)
+        MinecraftForge.EVENT_BUS.register(DeathNotifier)
         MinecraftForge.EVENT_BUS.register(DisplayArrowCount)
         MinecraftForge.EVENT_BUS.register(GardenVisitorDisplay)
         MinecraftForge.EVENT_BUS.register(HideEffectsHud)
@@ -51,6 +54,7 @@ class Melody {
         MinecraftForge.EVENT_BUS.register(WormCooldownTimer)
 
         // register commands
+        ClientCommandHandler.instance.registerCommand(EvaluateCommand)
         ClientCommandHandler.instance.registerCommand(MelodyCommand)
         ClientCommandHandler.instance.registerCommand(SimulateCommand)
         ClientCommandHandler.instance.registerCommand(TestCommand)
