@@ -9,11 +9,12 @@ import com.github.shmoe6.melody.features.combat.DisplayArrowCount
 import com.github.shmoe6.melody.features.dungeons.DeathNotifier
 import com.github.shmoe6.melody.features.farming.GardenVisitorDisplay
 import com.github.shmoe6.melody.features.general.SilenceSkyBlockNotifications
+import com.github.shmoe6.melody.features.improvements.ToggleSprint
 import com.github.shmoe6.melody.features.inventory.HideEffectsHud
 import com.github.shmoe6.melody.features.inventory.LockSlots
 import com.github.shmoe6.melody.features.inventory.MissingMaxEnchantments
 import com.github.shmoe6.melody.features.mining.WormCooldownTimer
-import com.github.shmoe6.melody.features.overlay.Clock
+import com.github.shmoe6.melody.features.general.Clock
 import com.github.shmoe6.melody.handlers.*
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiScreen
@@ -51,6 +52,7 @@ class Melody {
         MinecraftForge.EVENT_BUS.register(LockSlots)
         MinecraftForge.EVENT_BUS.register(MissingMaxEnchantments)
         MinecraftForge.EVENT_BUS.register(SilenceSkyBlockNotifications)
+        MinecraftForge.EVENT_BUS.register(ToggleSprint)
         MinecraftForge.EVENT_BUS.register(WormCooldownTimer)
 
         // register commands

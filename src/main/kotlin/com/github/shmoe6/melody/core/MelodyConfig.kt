@@ -23,7 +23,7 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
         type = PropertyType.SWITCH,
         name = "Missing Max Enchantments",
         description = "Displays missing max enchantments on an item.",
-        category = "General"
+        category = "Inventory"
     )
     var missingMaxEnchantsEnabled = false
 
@@ -39,7 +39,7 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
         type = PropertyType.SWITCH,
         name = "Garden Visitor Display",
         description = "Displays what crop the most recently talked to garden visitor has requested.",
-        category = "General"
+        category = "Farming"
     )
     var gardenVisitorDisplayEnabled = false
 
@@ -47,7 +47,7 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
         type = PropertyType.NUMBER,
         name = "Visitor Display xPos",
         description = "x coordinate to render the feature at",
-        category = "General",
+        category = "Farming",
         hidden = true
     )
     var visitorDisplayXPos = 50
@@ -56,7 +56,7 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
         type = PropertyType.NUMBER,
         name = "Visitor Display yPos",
         description = "y coordinate to render the feature at",
-        category = "General",
+        category = "Farming",
         hidden = true
     )
     var visitorDisplayYPos = 50
@@ -65,7 +65,7 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
         type = PropertyType.SWITCH,
         name = "Display Arrow Count",
         description = "Displays arrow count when holding a bow.",
-        category = "General"
+        category = "Combat"
     )
     var displayArrowCountEnabled = false
 
@@ -73,7 +73,7 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
         type = PropertyType.NUMBER,
         name = "Arrow Count xPos",
         description = "x coordinate to render the feature at",
-        category = "General",
+        category = "Combat",
         hidden = true
     )
     var arrowCountXPos = 50
@@ -82,7 +82,7 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
         type = PropertyType.NUMBER,
         name = "Arrow Count yPos",
         description = "y coordinate to render the feature at",
-        category = "General",
+        category = "Combat",
         hidden = true
     )
     var arrowCountYPos = 50
@@ -91,7 +91,7 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
         type = PropertyType.SWITCH,
         name = "Hide Effects HUD",
         description = "Hides vanilla potion effects HUD in inventory.",
-        category = "General"
+        category = "Improvements"
     )
     var hideEffectsHudEnabled = false
 
@@ -99,7 +99,7 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
         type = PropertyType.SWITCH,
         name = "Worm Cooldown Timer",
         description = "Displays the 30 second cooldown after you a worm spawns.",
-        category = "General"
+        category = "Mining"
     )
     var wormCooldownTimerEnabled = false
 
@@ -107,7 +107,7 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
         type = PropertyType.SWITCH,
         name = "Lock Slots",
         description = "Enables locking slots. Press L to toggle locking on a slot.",
-        category = "General",
+        category = "Inventory",
     )
     var lockSlotsEnabled = false
 
@@ -115,7 +115,7 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
         type = PropertyType.TEXT,
         name = "Locked Slots",
         description = "List of locked slots represented by their int index in the mainInventory.",
-        category = "General",
+        category = "Inventory",
         hidden = true
     )
     var lockedSlots = ""
@@ -150,13 +150,46 @@ object MelodyConfig: Vigilant(File("./config/Melody.toml")) {
         type = PropertyType.SWITCH,
         name = "Dungeon Death Notifier",
         description = "Plays a sound when someone dies in a dungeon.",
-        category = "General"
+        category = "Dungeons"
     )
     var dungeonDeathNotifierEnabled = false
+
+    @Property(
+        type = PropertyType.SWITCH,
+        name = "Toggle Sprint",
+        description = "Enables toggle sprint",
+        category = "Improvements"
+    )
+    var toggleSprintEnabled = false
+
+    @Property(
+        type = PropertyType.NUMBER,
+        name = "Toggle Sprint xPos",
+        description = "x coordinate to render the feature at",
+        category = "Improvements",
+        hidden = true
+    )
+    var toggleSprintXPos = 70
+
+    @Property(
+        type = PropertyType.NUMBER,
+        name = "Toggle Sprint yPos",
+        description = "y coordinate to render the feature at",
+        category = "Improvements",
+        hidden = true
+    )
+    var toggleSprintYPos = 70
+
 
     init {
         initialize()
         preload()
         setCategoryDescription("General", "General features")
+        setCategoryDescription("Combat", "Combat features")
+        setCategoryDescription("Dungeons", "Dungeons features")
+        setCategoryDescription("Mining", "Mining features")
+        setCategoryDescription("Farming", "Farming features")
+        setCategoryDescription("Inventory", "Inventory features")
+        setCategoryDescription("Improvements", "QoL improvements upon vanilla/base SkyBlock features")
     }
 }

@@ -1,4 +1,4 @@
-package com.github.shmoe6.melody.features.overlay
+package com.github.shmoe6.melody.features.general
 
 import com.github.shmoe6.melody.Melody
 import com.github.shmoe6.melody.core.MelodyConfig
@@ -26,7 +26,7 @@ object Clock : MelodyFeatureOverlayText {
     }
 
     init {
-        this.mainUiComponent.onMouseClick { event ->
+        mainUiComponent.onMouseClick { event ->
             if (OverlayHandler.editMode && isPointInside(event.absoluteX, event.absoluteY)) {
                 selectedInEditGui = true
             }
@@ -51,15 +51,15 @@ object Clock : MelodyFeatureOverlayText {
 
     @SubscribeEvent
     fun onTick(event: TickEvent) {
-        if (isFeatureEnabled()) return
+        if (!isFeatureEnabled()) return
 
         val currentTime = ZonedDateTime.now(ZoneId.systemDefault()).toString().substring(11, 16)
 
         if (currentTime != displayedTime) {
-            this.displayedTime = currentTime
+            displayedTime = currentTime
         }
 
-        mainUiComponent.setText(this.displayedTime)
+        mainUiComponent.setText(displayedTime)
     }
 
     override fun isFeatureEnabled(): Boolean {
